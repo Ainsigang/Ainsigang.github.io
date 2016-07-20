@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://ainsigang.github.io"></form>
@@ -61,26 +61,36 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-linux makefile文件" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-linux-makefile文件编写" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/07/20/linux makefile文件/" class="article-date">
-  <time datetime="2016-07-20T02:18:48.002Z" itemprop="datePublished">2016-07-20</time>
+    <a href="/2016/07/20/linux-makefile文件编写/" class="article-date">
+  <time datetime="2016-07-20T02:29:24.000Z" itemprop="datePublished">2016-07-20</time>
 </a>
     
   </div>
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/20/linux-makefile文件编写/">linux makefile文件编写</a>
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="linux-makefile文件"><a href="#linux-makefile文件" class="headerlink" title="linux makefile文件"></a>linux makefile文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">target:prerequisites</div><div class="line">    command</div><div class="line">```  </div><div class="line"></div><div class="line">**target**:要生成的目标文件  </div><div class="line">**prerequisites**:生成target所依赖的文件  </div><div class="line">**command**:执行的命令  </div><div class="line">**eg**:</div></pre></td></tr></table></figure>
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">target:prerequisites</div><div class="line">    command</div><div class="line">```  </div><div class="line"></div><div class="line">**target**:要生成的目标文件  </div><div class="line">**prerequisites**:生成target所依赖的文件  </div><div class="line">**command**:执行的命令  </div><div class="line">**eg**:</div></pre></td></tr></table></figure>
 <p>hello:hello.o #生成hello可执行文件依赖于hello.o文件<br>    gcc -o hello hello.o #生成hello可执行文件的命令<br>hello.o:hello.c #生成hello.o文件依赖于hello.c文件<br>    gcc -c hello.c #编译生成hello.o文件<br>.PHONY:clean #定义一个伪目标用于清除执行过程中生成的中间文件<br>clean:<br>    rm *.o #清除中间文件hello.o<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">在终端进入要编译的源文件所在目录下执行以下命令：</div></pre></td></tr></table></figure></p>
 <p>make #编译生成可执行文件<br>make clean #清除中间文件即hello.o文件<br>```</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ainsigang.github.io/2016/07/20/linux makefile文件/" data-id="ciqu9nfbq00025o8lo8isf5uh" class="article-share-link">Partager</a>
+      <a data-url="https://ainsigang.github.io/2016/07/20/linux-makefile文件编写/" data-id="ciqu9ur850002do8lfoqxu59d" class="article-share-link">Share</a>
       
       
     </footer>
@@ -125,7 +135,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ainsigang.github.io/2016/07/19/hello-world/" data-id="ciqu9nfbk00015o8l0oib3vi3" class="article-share-link">Partager</a>
+      <a data-url="https://ainsigang.github.io/2016/07/19/hello-world/" data-id="ciqu9ur7v0000do8lufeb0as6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -160,12 +170,12 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
           <li>
-            <a href="/2016/07/20/linux makefile文件/">(no title)</a>
+            <a href="/2016/07/20/linux-makefile文件编写/">linux makefile文件编写</a>
           </li>
         
           <li>
@@ -185,7 +195,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 ain<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
