@@ -83,14 +83,30 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="语法规则"><a href="#语法规则" class="headerlink" title="语法规则"></a>语法规则</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">target:prerequisites</div><div class="line">    command</div><div class="line">```  </div><div class="line"></div><div class="line">**target**:要生成的目标文件</div><div class="line">  </div><div class="line">**prerequisites**:生成target所依赖的文件</div><div class="line">  </div><div class="line">**command**:执行的命令 </div><div class="line"> </div><div class="line">**eg**:</div><div class="line"></div><div class="line">```html</div><div class="line">hello:hello.o #生成hello可执行文件依赖于hello.o文件</div><div class="line">    gcc -o hello hello.o #生成hello可执行文件的命令</div><div class="line">hello.o:hello.c #生成hello.o文件依赖于hello.c文件</div><div class="line">    gcc -c hello.c #编译生成hello.o文件</div><div class="line">.PHONY:clean #定义一个伪目标用于清除执行过程中生成的中间文件</div><div class="line">clean:</div><div class="line">    rm *.o #清除中间文件hello.o</div></pre></td></tr></table></figure>
+        <h3 id="语法规则"><a href="#语法规则" class="headerlink" title="语法规则"></a>语法规则</h3><p><code>html
+target:prerequisites
+    command</code> html </p>
+<p><strong>target</strong>:要生成的目标文件</p>
+<p><strong>prerequisites</strong>:生成target所依赖的文件</p>
+<p><strong>command</strong>:执行的命令 </p>
+<p><strong>eg</strong>:</p>
+<p><code>html
+hello:hello.o #生成hello可执行文件依赖于hello.o文件
+    gcc -o hello hello.o #生成hello可执行文件的命令
+hello.o:hello.c #生成hello.o文件依赖于hello.c文件
+    gcc -c hello.c #编译生成hello.o文件
+.PHONY:clean #定义一个伪目标用于清除执行过程中生成的中间文件
+clean:
+    rm *.o #清除中间文件hello.o</code>html</p>
 <p>在终端进入要编译的源文件所在目录下执行以下命令： </p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$make #编译生成可执行文件</div><div class="line">$make clean #清除中间文件即hello.o文件</div></pre></td></tr></table></figure>
+<p><code>html
+$make #编译生成可执行文件
+$make clean #清除中间文件即hello.o文件</code>html</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ainsigang.github.io/2016/07/20/linux-makefile文件编写/" data-id="ciquaa19i0002a48lq08wag3l" class="article-share-link">Share</a>
+      <a data-url="https://ainsigang.github.io/2016/07/20/linux-makefile文件编写/" data-id="ciquafuam00026k8l8rvfkplx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -135,7 +151,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ainsigang.github.io/2016/07/19/hello-world/" data-id="ciquaa19b0000a48l2bnguw9i" class="article-share-link">Share</a>
+      <a data-url="https://ainsigang.github.io/2016/07/19/hello-world/" data-id="ciquafuaf00006k8luzjstdwm" class="article-share-link">Share</a>
       
       
     </footer>
