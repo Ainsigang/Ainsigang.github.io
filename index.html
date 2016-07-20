@@ -83,15 +83,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>###语法规则</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">target:prerequisites</div><div class="line">    command</div><div class="line">```  </div><div class="line"></div><div class="line">**target**:要生成的目标文件</div><div class="line">  </div><div class="line">**prerequisites**:生成target所依赖的文件</div><div class="line">  </div><div class="line">**command**:执行的命令 </div><div class="line"> </div><div class="line">**eg**:</div></pre></td></tr></table></figure>
+        <h3 id="语法规则"><a href="#语法规则" class="headerlink" title="语法规则"></a>语法规则</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">target:prerequisites</div><div class="line">    command</div><div class="line">```  </div><div class="line"></div><div class="line">**target**:要生成的目标文件</div><div class="line">  </div><div class="line">**prerequisites**:生成target所依赖的文件</div><div class="line">  </div><div class="line">**command**:执行的命令 </div><div class="line"> </div><div class="line">**eg**:</div></pre></td></tr></table></figure>
 <p>hello:hello.o #生成hello可执行文件依赖于hello.o文件<br>    gcc -o hello hello.o #生成hello可执行文件的命令<br>hello.o:hello.c #生成hello.o文件依赖于hello.c文件<br>    gcc -c hello.c #编译生成hello.o文件<br>.PHONY:clean #定义一个伪目标用于清除执行过程中生成的中间文件<br>clean:<br>    rm *.o #清除中间文件hello.o<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">在终端进入要编译的源文件所在目录下执行以下命令：</div></pre></td></tr></table></figure></p>
 <p>make #编译生成可执行文件<br>make clean #清除中间文件即hello.o文件<br>```</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ainsigang.github.io/2016/07/20/linux-makefile文件编写/" data-id="ciqu9y1lu00028s8lwsmt1itm" class="article-share-link">Share</a>
+      <a data-url="https://ainsigang.github.io/2016/07/20/linux-makefile文件编写/" data-id="ciqu9zviu0000hk8l03b249g8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -136,7 +135,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ainsigang.github.io/2016/07/19/hello-world/" data-id="ciqu9y1lm00008s8lsmtft8v6" class="article-share-link">Share</a>
+      <a data-url="https://ainsigang.github.io/2016/07/19/hello-world/" data-id="ciqu9zvj20002hk8loednzjej" class="article-share-link">Share</a>
       
       
     </footer>
