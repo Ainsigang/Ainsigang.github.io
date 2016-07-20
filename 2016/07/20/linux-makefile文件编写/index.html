@@ -5,16 +5,16 @@
   
   <title>linux makefile文件编写 | Ain</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="语法规则1234567891011121314151617181920target:prerequisites    command``` **target**:要生成的目标文件  **prerequisites**:生成target所依赖的文件  **command**:执行的命令  **eg**:```htmlhello:hello.o #生成hello可执行文件依赖于hello.o文件">
+  <meta name="description" content="语法规则123456789101112131415161718192021222324252627target:prerequisites    command```html **target**:要生成的目标文件  **prerequisites**:生成target所依赖的文件  **command**:执行的命令  **eg**:```htmlhello:hello.o #生成hello可执">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux makefile文件编写">
 <meta property="og:url" content="https://ainsigang.github.io/2016/07/20/linux-makefile文件编写/index.html">
 <meta property="og:site_name" content="Ain">
-<meta property="og:description" content="语法规则1234567891011121314151617181920target:prerequisites    command``` **target**:要生成的目标文件  **prerequisites**:生成target所依赖的文件  **command**:执行的命令  **eg**:```htmlhello:hello.o #生成hello可执行文件依赖于hello.o文件">
-<meta property="og:updated_time" content="2016-07-20T02:49:25.265Z">
+<meta property="og:description" content="语法规则123456789101112131415161718192021222324252627target:prerequisites    command```html **target**:要生成的目标文件  **prerequisites**:生成target所依赖的文件  **command**:执行的命令  **eg**:```htmlhello:hello.o #生成hello可执">
+<meta property="og:updated_time" content="2016-07-20T02:53:53.402Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux makefile文件编写">
-<meta name="twitter:description" content="语法规则1234567891011121314151617181920target:prerequisites    command``` **target**:要生成的目标文件  **prerequisites**:生成target所依赖的文件  **command**:执行的命令  **eg**:```htmlhello:hello.o #生成hello可执行文件依赖于hello.o文件">
+<meta name="twitter:description" content="语法规则123456789101112131415161718192021222324252627target:prerequisites    command```html **target**:要生成的目标文件  **prerequisites**:生成target所依赖的文件  **command**:执行的命令  **eg**:```htmlhello:hello.o #生成hello可执">
   
     <link rel="alternate" href="/atom.xml" title="Ain" type="application/atom+xml">
   
@@ -85,14 +85,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="语法规则"><a href="#语法规则" class="headerlink" title="语法规则"></a>语法规则</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">target:prerequisites</div><div class="line">    command</div><div class="line">``` </div><div class="line"></div><div class="line">**target**:要生成的目标文件</div><div class="line">  </div><div class="line">**prerequisites**:生成target所依赖的文件</div><div class="line">  </div><div class="line">**command**:执行的命令 </div><div class="line"> </div><div class="line">**eg**:</div><div class="line"></div><div class="line">```html</div><div class="line">hello:hello.o #生成hello可执行文件依赖于hello.o文件</div><div class="line">    gcc -o hello hello.o #生成hello可执行文件的命令</div><div class="line">hello.o:hello.c #生成hello.o文件依赖于hello.c文件</div><div class="line">    gcc -c hello.c #编译生成hello.o文件</div><div class="line">.PHONY:clean #定义一个伪目标用于清除执行过程中生成的中间文件</div><div class="line">clean:</div><div class="line">    rm *.o #清除中间文件hello.o</div></pre></td></tr></table></figure>
-<p>在终端进入要编译的源文件所在目录下执行以下命令： </p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$make #编译生成可执行文件</div><div class="line">$make clean #清除中间文件即hello.o文件</div></pre></td></tr></table></figure>
+        <h3 id="语法规则"><a href="#语法规则" class="headerlink" title="语法规则"></a>语法规则</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">target:prerequisites</div><div class="line">    command</div><div class="line">```html </div><div class="line"></div><div class="line">**target**:要生成的目标文件</div><div class="line">  </div><div class="line">**prerequisites**:生成target所依赖的文件</div><div class="line">  </div><div class="line">**command**:执行的命令 </div><div class="line"> </div><div class="line">**eg**:</div><div class="line"></div><div class="line">```html</div><div class="line">hello:hello.o #生成hello可执行文件依赖于hello.o文件</div><div class="line">    gcc -o hello hello.o #生成hello可执行文件的命令</div><div class="line">hello.o:hello.c #生成hello.o文件依赖于hello.c文件</div><div class="line">    gcc -c hello.c #编译生成hello.o文件</div><div class="line">.PHONY:clean #定义一个伪目标用于清除执行过程中生成的中间文件</div><div class="line">clean:</div><div class="line">    rm *.o #清除中间文件hello.o</div><div class="line">```html</div><div class="line"></div><div class="line">在终端进入要编译的源文件所在目录下执行以下命令： </div><div class="line"> </div><div class="line">```html</div><div class="line">$make #编译生成可执行文件</div><div class="line">$make clean #清除中间文件即hello.o文件</div></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ainsigang.github.io/2016/07/20/linux-makefile文件编写/" data-id="ciquan0of0002188lkis3vkpv" class="article-share-link">Share</a>
+      <a data-url="https://ainsigang.github.io/2016/07/20/linux-makefile文件编写/" data-id="ciquap8w40002ro8lowfsdwk2" class="article-share-link">Share</a>
       
       
     </footer>
