@@ -83,31 +83,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="RIP路由接受故障处理思路"><a href="#RIP路由接受故障处理思路" class="headerlink" title="RIP路由接受故障处理思路"></a>RIP路由接受故障处理思路</h3><ul>
-<li>检查入接口是否在RIP中宣告。</li>
-<li>检查入接口是否工作正常。</li>
-<li>检查对方的发送版本号和本地的接收版本号是否匹配。</li>
-<li>检查入接口是否配置了 <strong>undo rip input</strong> 命令。</li>
-<li>检查在RIP中是否配置了策略，过滤收到的RIP路由。</li>
-<li>检查入接口是否配置了 <strong>RIP metricin</strong>命令，使接收到的路由的度量值大于15。</li>
-<li>检查接收到的路由度量值是否大于15。</li>
-<li>检查在路由表中是否有从其他协议学到的相同的路由。</li>
-</ul>
-<h3 id="RIP发送故障处理思路"><a href="#RIP发送故障处理思路" class="headerlink" title="RIP发送故障处理思路"></a>RIP发送故障处理思路</h3><ul>
-<li>检查出接口是否在RIP中宣告。</li>
-<li>检查出接口工作是否正常。</li>
-<li>检查出接口是否配置了 <strong>silent-interface</strong>　命令。</li>
-<li>检查出接口是否配置了 <strong>undo rip output</strong>　命令。</li>
-<li>检查出接口是否配置了水平分割命令。</li>
-<li>检查在RIP中是否配置了策略，过滤了需要发布出去的RIP路由。</li>
-<li>如果要发送的路由来自本地的接口地址，检查接口的状态。</li>
-<li>检查是否有其他特殊问题。</li>
-</ul>
-
+        <p>本篇介绍一下RIP路由的故障处理思路。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/07/24/RIP故障定位/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ainsigang.github.io/2016/07/24/RIP故障定位/" data-id="cir06y0w400007w8loobof160" class="article-share-link">Share</a>
+      <a data-url="https://ainsigang.github.io/2016/07/24/RIP故障定位/" data-id="cir0q0rm70000e08l5y8igt9c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -139,19 +124,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="语法规则"><a href="#语法规则" class="headerlink" title="语法规则"></a>语法规则</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">target:prerequisites</div><div class="line">    command</div></pre></td></tr></table></figure>
-<p><strong>target</strong>:要生成的目标文件</p>
-<p><strong>prerequisites</strong>:生成target所依赖的文件</p>
-<p><strong>command</strong>:执行的命令 </p>
-<p><strong>eg</strong>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">hello:hello.o #生成hello可执行文件依赖于hello.o文件</div><div class="line">    gcc -o hello hello.o #生成hello可执行文件的命令</div><div class="line">hello.o:hello.c #生成hello.o文件依赖于hello.c文件</div><div class="line">    gcc -c hello.c #编译生成hello.o文件</div><div class="line">.PHONY:clean #定义一个伪目标用于清除执行过程中生成的中间文件</div><div class="line">clean:</div><div class="line">    rm *.o #清除中间文件hello.o</div></pre></td></tr></table></figure>
-<p>在终端进入要编译的源文件所在目录下执行以下命令： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$make #编译生成可执行文件</div><div class="line">$make clean #清除中间文件即hello.o文件</div></pre></td></tr></table></figure>
-
+        <p>简单的makefile文件编写规则介绍。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/07/20/linux-makefile文件编写/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ainsigang.github.io/2016/07/20/linux-makefile文件编写/" data-id="cir06y0wc00027w8luexnohne" class="article-share-link">Share</a>
+      <a data-url="https://ainsigang.github.io/2016/07/20/linux-makefile文件编写/" data-id="cir0q0rmh0002e08la3mz3r9u" class="article-share-link">Share</a>
       
       
     </footer>
