@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>RIP故障定位 | Ain</title>
+  <title>OSPF网络类型 | Ain</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本篇介绍一下RIP路由的故障处理思路。">
+  <meta name="description" content="本篇介绍OSPF的4中网络类型及应用。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RIP故障定位">
-<meta property="og:url" content="https://ainsigang.github.io/2016/07/24/RIP故障定位/index.html">
+<meta property="og:title" content="OSPF网络类型">
+<meta property="og:url" content="https://ainsigang.github.io/2016/07/30/OSPF网络类型/index.html">
 <meta property="og:site_name" content="Ain">
-<meta property="og:description" content="本篇介绍一下RIP路由的故障处理思路。">
-<meta property="og:updated_time" content="2016-07-24T14:49:10.016Z">
+<meta property="og:description" content="本篇介绍OSPF的4中网络类型及应用。">
+<meta property="og:updated_time" content="2016-07-30T09:55:21.928Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RIP故障定位">
-<meta name="twitter:description" content="本篇介绍一下RIP路由的故障处理思路。">
+<meta name="twitter:title" content="OSPF网络类型">
+<meta name="twitter:description" content="本篇介绍OSPF的4中网络类型及应用。">
   
     <link rel="alternate" href="/atom.xml" title="Ain" type="application/atom+xml">
   
@@ -63,10 +63,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-RIP故障定位" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-OSPF网络类型" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/07/24/RIP故障定位/" class="article-date">
-  <time datetime="2016-07-24T05:17:24.000Z" itemprop="datePublished">2016-07-24</time>
+    <a href="/2016/07/30/OSPF网络类型/" class="article-date">
+  <time datetime="2016-07-30T04:19:59.000Z" itemprop="datePublished">2016-07-30</time>
 </a>
     
   </div>
@@ -77,7 +77,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      RIP故障定位
+      OSPF网络类型
     </h1>
   
 
@@ -85,32 +85,30 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>本篇介绍一下RIP路由的故障处理思路。<br><a id="more"></a></p>
-<h3 id="RIP路由接受故障处理思路"><a href="#RIP路由接受故障处理思路" class="headerlink" title="RIP路由接受故障处理思路"></a>RIP路由接受故障处理思路</h3><ul>
-<li>检查入接口是否在RIP中宣告。</li>
-<li>检查入接口是否工作正常。</li>
-<li>检查对方的发送版本号和本地的接收版本号是否匹配。</li>
-<li>检查入接口是否配置了 <strong>undo rip input</strong> 命令。</li>
-<li>检查在RIP中是否配置了策略，过滤收到的RIP路由。</li>
-<li>检查入接口是否配置了 <strong>RIP metricin</strong>命令，使接收到的路由的度量值大于15。</li>
-<li>检查接收到的路由度量值是否大于15。</li>
-<li>检查在路由表中是否有从其他协议学到的相同的路由。</li>
+        <p>本篇介绍OSPF的4中网络类型及应用。</p>
+<a id="more"></a>
+<h3 id="OSPF网络类型"><a href="#OSPF网络类型" class="headerlink" title="OSPF网络类型"></a>OSPF网络类型</h3><p>OSPF共定义了4种不同的网络类型，分别为 <strong>广播网络(Broadcast)</strong> ， <strong>NBMA(Non-Broadcast Multi-Access)网络</strong>， <strong>点到点网络(Point-to-Point)网络</strong>， <strong>点到多网络(Point-to-Mulitpoint)网络</strong>。前两种类型的网络都要进行 <strong>DR</strong>和 <strong>BDR</strong>的选举，而后两者不进行选举。在默认情况下，OSPF协议会根据接口的链路层封装协议去自动设定接口的网络类型，以太接口的网络类型为 <strong>Broadcast</strong>,串行口如果链路层封装协议是 <strong>PPP</strong>协议或 <strong>HDLC</strong>协议,则默认网络类型为点到点网络， <strong>ATM</strong>或 <strong>帧中继(FR)</strong>接口的默认网络类型为 <strong>NBMA</strong>。OSPF的灵活之处在于接口的网络类型是可以根据需要人为修改的，这极大提高了OSPF的适应能力。</p>
+<h4 id="详细介绍"><a href="#详细介绍" class="headerlink" title="详细介绍"></a>详细介绍</h4><ul>
+<li><strong>Broadcast网络</strong></li>
 </ul>
-<h3 id="RIP发送故障处理思路"><a href="#RIP发送故障处理思路" class="headerlink" title="RIP发送故障处理思路"></a>RIP发送故障处理思路</h3><ul>
-<li>检查出接口是否在RIP中宣告。</li>
-<li>检查出接口工作是否正常。</li>
-<li>检查出接口是否配置了 <strong>silent-interface</strong>　命令。</li>
-<li>检查出接口是否配置了 <strong>undo rip output</strong>　命令。</li>
-<li>检查出接口是否配置了水平分割命令。</li>
-<li>检查在RIP中是否配置了策略，过滤了需要发布出去的RIP路由。</li>
-<li>如果要发送的路由来自本地的接口地址，检查接口的状态。</li>
-<li>检查是否有其他特殊问题。</li>
+<p>使用于以太网，令牌环网，FDDI网络，用于连接多于2台的路由器，而且是广播型的，当路由器较多时，每台路由器需要与其他每一台路由器建立邻居关系，会出现很多冗余，因此会在网络中选择 <strong>DR和BDR</strong>，其他路由器只与 **DR和BDR建立邻接关系，一次减少冗余。网络中采用组播发送数据包，DR和BDR发送的数据包的目的地址为224.0.0.5，DRothers发送的跟心数据包目的地址为224.0.0.6.</p>
+<ul>
+<li><strong>NBMA网络</strong></li>
 </ul>
+<p>帧中继，ATM，X.25网络用于连接多余2台的路由器，但没有广播数据包的能力，必须增加另外的配置来使他们 <strong>获得邻居</strong>，网络中需要选举 <strong>DR和BDR</strong>，OSPF采用单播发送数据包。</p>
+<ul>
+<li><strong>点到点网络</strong></li>
+</ul>
+<p>连接单独一对路由器，在点到点网络上，邻居路由器总是能形成邻接关系，不需要选举DR和BDR。</p>
+<ul>
+<li><strong>点到多网络</strong></li>
+</ul>
+<p>点到多网络可以看成一群点到点链路的集合，不需要选举DR和BDR，数据包以单播方式发送，并且这种网络类型只能是其他网络类型更改而来，没有一种链路层封装协议会被缺省认为是点到多网络。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ainsigang.github.io/2016/07/24/RIP故障定位/" data-id="cir902jo900022w8lczpuzcgj" class="article-share-link">Share</a>
+      <a data-url="https://ainsigang.github.io/2016/07/30/OSPF网络类型/" data-id="cir902jne00002w8lkwz9f7zt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -119,19 +117,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/07/27/ospf的区域及lsa类型/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          ospf的区域及lsa类型
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/07/20/linux-makefile文件编写/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/07/27/ospf的区域及lsa类型/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">linux makefile文件编写</div>
+      <div class="article-nav-title">ospf的区域及lsa类型</div>
     </a>
   
 </nav>
