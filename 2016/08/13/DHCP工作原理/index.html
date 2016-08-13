@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>DHCP工作原理 | Ain</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="网络协议复习篇之二：DHCP的工作原理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DHCP工作原理">
+<meta property="og:url" content="https://ainsigang.github.io/2016/08/13/DHCP工作原理/index.html">
+<meta property="og:site_name" content="Ain">
+<meta property="og:description" content="网络协议复习篇之二：DHCP的工作原理">
+<meta property="og:image" content="https://ainsigang.github.io/images/dhcp1.jpg">
+<meta property="og:updated_time" content="2016-08-13T09:47:42.601Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DHCP工作原理">
+<meta name="twitter:description" content="网络协议复习篇之二：DHCP的工作原理">
+<meta name="twitter:image" content="https://ainsigang.github.io/images/dhcp1.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Ain" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Ain</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://ainsigang.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-DHCP工作原理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/13/DHCP工作原理/" class="article-date">
+  <time datetime="2016-08-13T08:28:05.000Z" itemprop="datePublished">2016-08-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      DHCP工作原理
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>网络协议复习篇之二：DHCP的工作原理</p>
+<a id="more"></a>
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>DHCP(Dynamic Host Configure Protocol),动态主机配置协议，用于向网络中的主机 <strong>自动分配</strong> ip地址，避免了网络中出现IP地址冲突，同时大大降低了网络管理人员的工作负担。DHCP协议是一种应用层协议，运行与UDP协议之上。同时DHCP还是一种C/S架构协议，有客户端和服务端之分，请求IP地址的一端为客户端，以UDP端口号68进行数据传输，提供IP地址的一端为服务端，以UDP端口号67进行数据传输。</p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>在整个DHCP服务器为客户端分配IP的过程，一共经历了四个阶段，整个过程如图描述：</p>
+<p><img src="/images/dhcp1.jpg" alt=""></p>
+<ul>
+<li>发现阶段(DISCOVER)</li>
+</ul>
+<p>在客户端配置了DHCP客户端程序并启动后，以 <strong>广播形式</strong> 向局域网内发送 <strong>DHCP DISCOVER</strong> 报文，以寻找局域网中的DHCP服务器。此广播报文在传输层采用UDP 68号端口发送。在网络层封装中，由于此时主机还没有可用的IP地址，故 <strong>源IP地址</strong> 为 <strong>0.0.0.0</strong>， <strong>目的IP地址</strong> 为 <strong>255.255.255.255</strong>。在链路层中，局域网为以太网时， <strong>源MAC地址</strong> 为主机的MAC地址， <strong>目的MAC地址</strong> 为 <strong>FF-FF-FF-FF-FF-FF</strong>。</p>
+<ul>
+<li>提供阶段(OFFER)</li>
+</ul>
+<p>局域网中的DHCP服务器接收到了DISCOVER报文之后，会根据自己IP地址池中IP分配的优先次序选出一个IP地址，然后与其他参数一起通过传输层的UDP 67号端口以广播方式发送给客户端，目的端口是UDP 68号。在网络层的封装中， <strong>源IP地址</strong> 为 <strong>DHCP服务器的IP地址</strong>，目的IP地址为 255.255.255.255。在链路层的封装中， <strong>源MAC地址</strong> 为 <strong>DHCP服务器的MAC地址</strong>。 <strong>目的MAC地址</strong> 为 <strong>客户端的MAC地址</strong>(从DISCOVER报文中获得)。</p>
+<ul>
+<li>请求阶段(REQUEST)</li>
+</ul>
+<p>如果局域网中存在多台DHCP服务器，则客户端会收到多于一条的 DHCP OFFER报文，一般客户端会选择最先收到的一条。然后以广播的方式向这台DHCP服务器发送 DHCP REQUEST 报文。在传输层任仍然是 UDP 68号发送，目的端口为 UDP 67号，在网络层，由于此时客户端仍没有获得IP地址， <strong>源IP地址还为0.0.0.0</strong>，目的IP地址为DHCP服务器的IP地址(从OFFER报文中获得)，在链路层，源MAC地址为客户端的MAC地址，目的MAC地址为DHCP服务器的MAC地址。</p>
+<ul>
+<li>确认阶段(ACK/NACK)</li>
+</ul>
+<p>DHCP服务器确认给客户端分配IP地址的阶段。在DHCP服务器收到客户端的REQUEST报文后，如果确认将IP地址分配给客户端，则以广播方式回复客户端 ACK报文，否则回复NAK报文。在ACK报文中，源端口号为UDP 67，目的端口号UDP 68号。源IP地址为DHCP服务器的IP地址，目的IP地址为广播地址255.25.255.255。源MAC地址为DHCP服务器的MAC地址，目的MAC地址为客户端的MAC地址。同时在选项部分，会把所分配的IP地址的子网掩码、默认网关、DNS服务器、租约期、续约时间等信息加上。</p>
+<p>最后，在客户端收到DHCP ACK报文后，会发生一个免费ARP报文来确认此IP地址在局域网内是唯一的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ainsigang.github.io/2016/08/13/DHCP工作原理/" data-id="cirt01q2e0000888l73xpqqce" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/08/13/DNS域名解析原理/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">DNS域名解析原理</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/08/13/DHCP工作原理/">DHCP工作原理</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/13/DNS域名解析原理/">DNS域名解析原理</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/31/OSPF配置路由聚合/">OSPF配置路由聚合</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/30/OSPF网络类型/">OSPF网络类型</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/27/ospf的区域及lsa类型/">ospf的区域及lsa类型</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 ain<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
