@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>linux makefile文件编写 | Ain</title>
+  <title>OSPF配置路由聚合 | Ain</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="简单的makefile文件编写规则介绍。">
+  <meta name="description" content="OSPF不支持自动路由聚合，仅支持手动路由聚合，本篇介绍OSPF的路由聚合配置。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux makefile文件编写">
-<meta property="og:url" content="https://ainsigang.github.io/2016/07/20/linux-makefile文件编写/index.html">
+<meta property="og:title" content="OSPF配置路由聚合">
+<meta property="og:url" content="https://ainsigang.github.io/2016/07/31/OSPF配置路由聚合/index.html">
 <meta property="og:site_name" content="Ain">
-<meta property="og:description" content="简单的makefile文件编写规则介绍。">
-<meta property="og:updated_time" content="2016-07-24T14:49:10.013Z">
+<meta property="og:description" content="OSPF不支持自动路由聚合，仅支持手动路由聚合，本篇介绍OSPF的路由聚合配置。">
+<meta property="og:updated_time" content="2016-07-31T05:18:19.060Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="linux makefile文件编写">
-<meta name="twitter:description" content="简单的makefile文件编写规则介绍。">
+<meta name="twitter:title" content="OSPF配置路由聚合">
+<meta name="twitter:description" content="OSPF不支持自动路由聚合，仅支持手动路由聚合，本篇介绍OSPF的路由聚合配置。">
   
     <link rel="alternate" href="/atom.xml" title="Ain" type="application/atom+xml">
   
@@ -63,10 +63,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-linux-makefile文件编写" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-OSPF配置路由聚合" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/07/20/linux-makefile文件编写/" class="article-date">
-  <time datetime="2016-07-20T02:29:24.000Z" itemprop="datePublished">2016-07-20</time>
+    <a href="/2016/07/31/OSPF配置路由聚合/" class="article-date">
+  <time datetime="2016-07-31T04:39:03.000Z" itemprop="datePublished">2016-07-31</time>
 </a>
     
   </div>
@@ -77,7 +77,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      linux makefile文件编写
+      OSPF配置路由聚合
     </h1>
   
 
@@ -85,20 +85,29 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>简单的makefile文件编写规则介绍。<br><a id="more"></a></p>
-<h3 id="语法规则"><a href="#语法规则" class="headerlink" title="语法规则"></a>语法规则</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">target:prerequisites</div><div class="line">    command</div></pre></td></tr></table></figure>
-<p><strong>target</strong>:要生成的目标文件</p>
-<p><strong>prerequisites</strong>:生成target所依赖的文件</p>
-<p><strong>command</strong>:执行的命令 </p>
-<p><strong>eg</strong>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">hello:hello.o #生成hello可执行文件依赖于hello.o文件</div><div class="line">    gcc -o hello hello.o #生成hello可执行文件的命令</div><div class="line">hello.o:hello.c #生成hello.o文件依赖于hello.c文件</div><div class="line">    gcc -c hello.c #编译生成hello.o文件</div><div class="line">.PHONY:clean #定义一个伪目标用于清除执行过程中生成的中间文件</div><div class="line">clean:</div><div class="line">    rm *.o #清除中间文件hello.o</div></pre></td></tr></table></figure>
-<p>在终端进入要编译的源文件所在目录下执行以下命令： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$make #编译生成可执行文件</div><div class="line">$make clean #清除中间文件即hello.o文件</div></pre></td></tr></table></figure>
-
+        <p>OSPF不支持自动路由聚合，仅支持手动路由聚合，本篇介绍OSPF的路由聚合配置。</p>
+<a id="more"></a>
+<h3 id="OSPF路由聚合"><a href="#OSPF路由聚合" class="headerlink" title="OSPF路由聚合"></a>OSPF路由聚合</h3><p>OSPF不支持自动路由聚合，仅支持手动路由聚合。OSPF的路由聚合有两种机制：</p>
+<ol>
+<li><strong>区域间路由聚合</strong></li>
+<li><strong>外部路由聚合</strong></li>
+</ol>
+<ul>
+<li><strong>区域间路由聚合</strong></li>
+</ul>
+<p>区域间路由聚合必须配置在 <strong>ABR路由器</strong>上，指的是ABR把在与自己直接相连区域中的 <strong>Type-1和Type-2 LSA</strong>转换成 <strong>Type-3 LSA</strong>时，对生成的 <strong>Type-3 LSA</strong>进行聚合，从而减少传播至与自己直接相连的区域的 <strong>Type-3 LSA</strong>的数量。需要注意的是，区域间路由聚合只能聚合由Type-1或Type-2 LSA产生的路由，如果路由是由外部或其他区域传到本区域的(或者说是路由是有Type-5或Type-3生成的),则对于这样的路由ABR是不能够聚合。</p>
+<p>使用如下命令可在ABR上配置区域间路由聚合：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">abr-summary IP MASK  //IP为聚合的网段的IP，MASK为网段的子网掩码</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>外部路由聚合</strong></li>
+</ul>
+<p>外部路由聚合是指在 <strong>ASBR</strong>路由器上针对引入OSPF网络的外部路由进行的聚合，目的是减少在OSPF网络中 <strong>Type-5 LSA</strong>的数量。外部路由聚合必须在外部路由进入OSPF网络的ASBR路由器上进行。对于 <strong>NSSA</strong>区域，当该区域的ABR将 <strong>Type-7 LSA</strong>转换为 <strong>Type-5 LSA</strong>时，该ABR也可以充当ASBR的角色，并对 <strong>Type-5 LSA</strong>进行聚合。需要注意的是，当 <strong>NSSA</strong>区域存在多台ABR时，必须由 <strong>Router-ID</strong>最大的ABR进行 <strong>Type-7 LSA到Type-5 LSA</strong>的转换操作。</p>
+<p>使用如下命令可在ASBR上配置外部路由聚合：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">asbr-summary IP MASK  //IP为聚合的网段IP，MASK外网段的子网掩码</div></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ainsigang.github.io/2016/07/20/linux-makefile文件编写/" data-id="cirsqeysd0002j88ll62arqtl" class="article-share-link">Share</a>
+      <a data-url="https://ainsigang.github.io/2016/07/31/OSPF配置路由聚合/" data-id="cirsqeysp0005j88landbnixy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -107,15 +116,20 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/07/24/RIP故障定位/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/08/13/DNS域名解析原理/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          RIP故障定位
+          DNS域名解析原理
         
       </div>
     </a>
   
+  
+    <a href="/2016/07/30/OSPF网络类型/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">OSPF网络类型</div>
+    </a>
   
 </nav>
 

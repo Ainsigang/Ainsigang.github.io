@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>DNS域名解析原理 | Ain</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="网络协议复习篇一：DNS的原理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DNS域名解析原理">
+<meta property="og:url" content="https://ainsigang.github.io/2016/08/13/DNS域名解析原理/index.html">
+<meta property="og:site_name" content="Ain">
+<meta property="og:description" content="网络协议复习篇一：DNS的原理">
+<meta property="og:image" content="https://ainsigang.github.io/images/dns1.jpg">
+<meta property="og:image" content="https://ainsigang.github.io/images/dns4.jpg">
+<meta property="og:image" content="https://ainsigang.github.io/images/dns2.jpg">
+<meta property="og:updated_time" content="2016-08-13T05:23:56.728Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DNS域名解析原理">
+<meta name="twitter:description" content="网络协议复习篇一：DNS的原理">
+<meta name="twitter:image" content="https://ainsigang.github.io/images/dns1.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Ain" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Ain</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://ainsigang.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-DNS域名解析原理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/13/DNS域名解析原理/" class="article-date">
+  <time datetime="2016-08-13T03:57:54.000Z" itemprop="datePublished">2016-08-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      DNS域名解析原理
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>网络协议复习篇一：DNS的原理</p>
+<a id="more"></a>
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>DNS(Domain Name System),即域名系统。DNS是一项 <strong>internet服务</strong>，主要提供网站域名与IP地址的相互转换的服务。在我们日常的上网活动中，我们一般习惯于采用网站的域名来访问，而在网络世界中，主机之间的访问是靠全球唯一的IP地址来实现的，因此需要一项服务来实现网站域名与IP地址之间的转换任务，这就是DNS服务。域名与IP地址之间是一一对应的关系，但是多个域名可以对应于同一个IP地址，就像一个人(IP),我们可以通过他的身份证号(域名1)找到他，也可以通过他的名字(域名2)找到他，还可以通过他的QQ号码(域名3)找到他。</p>
+<h3 id="DNS的结构"><a href="#DNS的结构" class="headerlink" title="DNS的结构"></a>DNS的结构</h3><p>我们通过DNS查询到的转换关系其实是一条一条的数据，说到底，DNS就是一个巨大的数据库，一个具有层次结构的分布式数据库。在DNS数据库中的名称形成的一个分层树状结构称为 <strong>域命名空间</strong>，他的层次结构如图：</p>
+<p><img src="/images/dns1.jpg" alt=""></p>
+<p>每个节点所在所在的那一层称为一个域。按照域命名空间的功能可以分为以下五类：</p>
+<p><img src="/images/dns4.jpg" alt=""></p>
+<h3 id="DNS的解析过程"><a href="#DNS的解析过程" class="headerlink" title="DNS的解析过程"></a>DNS的解析过程</h3><p>DNS解析有两种不同的方式： <strong>递归</strong> 和 <strong>迭代</strong>。</p>
+<ul>
+<li>递归查询</li>
+</ul>
+<p>客户机有时也可通过使用从以前查询获得的缓存信息就地应答查询。DNS 服务器可使用其自身的资源记录信息缓存来应答查询，也可代表请求客户机来查询或联系其他 DNS 服务器，以完全解析该名称，并随后将应答返回至客户机。这个过程称为递归。</p>
+<ul>
+<li>迭代查询</li>
+</ul>
+<p>客户机自己也可尝试联系其他的 DNS 服务器来解析名称。如果客户机这么做，它会使用基于服务器应答的独立和附加的查询，该过程称作迭代，即DNS服务器之间的交互查询就是迭代查询。</p>
+<p>DNS查询过程如图：</p>
+<p><img src="/images/dns2.jpg" alt=""></p>
+<ol>
+<li>当我们在浏览器中输入一个网站域名(如www.huawei.com)并访问时，首先主机会查询本机的Hosts文件中是否有此域名和IP的映射，如果有，则调用此IP，完成解析。</li>
+<li>如果Hosts文件中没有映射关系，则查询本地DNS缓存，如果查询到相应的映射关系，则返回IP，完成解析。以上两种都属于本地解析。</li>
+<li>如果以上两种都没有，则主机需要向本地DNS服务器发送DNS查询请求，询问“www.huawei.com的IP地址是多少啊？”，本地DNS服务器收到查询请求后，查询自己的数据库，如果发现有www.huawei.com与IP地址的映射，则向查询主机发送DNS相应返回对应的IP地址，完成解析，此解析具有权威性。</li>
+<li>如果DNS服务器在自己数据库中没有找到映射条目，则查询缓存的映射关系中有没有此映射关系，如果有，则向查询主机发送DNS响应返回IP地址，完成解析，此解析不具有权威性。</li>
+<li><p>如果本地DNS服务器的数据库和缓存解析都失败了，则本地DNS服务器根据是否设置了转发器来进行下一步查询操作。如果没有设置转发器，本地DNS服务器就会向 <strong>根域名服务器</strong> 发送查询请求，根域名服务器在全球一共有13台，根域名服务器收到请求后会判断此域名(.com)是有哪一个顶级域名服务器授权管理的，并向本地DNS服务器返回此顶级域名服务器的IP地址，本地DNS服务器收到IP后会向此顶级域名服务器继续发送查询请求，顶级域名服务器收到请求后，也会查询是哪一个二级域名服务器管理此域名(huawei.com)，然后向本地DNS服务器返回此二级域名服务器的IP地址，本地DNS服务器会继续向此二级域名服务器发送查询请求，重复以上步骤，直到本地DNS服务器得到www.huawei.com这个域名对应的IP地址，最后向查询主机发送DNS响应返回此IP地址，并将此映射关系加入缓存，保存一段时间，主机收到IP地址并也将映射关系加入自己的DNS缓存，完成解析。</p>
+</li>
+<li><p>如果本地DNS服务器设置了转发模式，此DNS服务器会把请求转发至上一级DNS服务器，由上一级进行解析，上一级如何解析又看它的转发设置，解析完成后将结果返回到本地DNS服务器，再由本地DNS服务器返回到查询主机。</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ainsigang.github.io/2016/08/13/DNS域名解析原理/" data-id="cirsqeyq90000j88l80pul3o0" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/31/OSPF配置路由聚合/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">OSPF配置路由聚合</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/08/13/DNS域名解析原理/">DNS域名解析原理</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/31/OSPF配置路由聚合/">OSPF配置路由聚合</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/30/OSPF网络类型/">OSPF网络类型</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/27/ospf的区域及lsa类型/">ospf的区域及lsa类型</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/24/RIP故障定位/">RIP故障定位</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 ain<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
