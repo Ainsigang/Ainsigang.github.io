@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://ainsigang.github.io/2016/08/14/RIP路由协议工作原理/index.html">
 <meta property="og:site_name" content="Ain">
 <meta property="og:description" content="网络协议复习篇之四：RIP路由协议工作原理">
-<meta property="og:updated_time" content="2016-08-14T13:20:02.220Z">
+<meta property="og:updated_time" content="2016-08-14T13:23:24.956Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RIP路由协议工作原理">
 <meta name="twitter:description" content="网络协议复习篇之四：RIP路由协议工作原理">
@@ -52,9 +52,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://ainsigang.github.io"></form>
@@ -88,8 +88,8 @@
         <p>网络协议复习篇之四：RIP路由协议工作原理</p>
 <a id="more"></a>
 <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>RIP(Routing Information Protocol),路由信息协议。是应用较早、使用较普遍的内部网关协议（Interior Gateway Protocol，IGP），适用于小型同类网络的一个自治系统（AS）内的路由信息的传递。RIP采用的是距离矢量算法计算路由，所以也称距离向量协议。</p>
-<h3 id="工作机制"><a href="#工作机制" class="headerlink" title="工作机制"></a>工作机制</h3><p>RIP是一中距离矢量算法协议，它使用UDP报文进行路由信息的交换，使用520号端口。RIP使用跳数来衡量距离，路由器到它直连网段的跳数为0，其后每经过一个路由器跳数加一，为了限制收敛时间，RIP规定跳数取0~15之间的整数，距离大于或等于16跳的网络为不可达，因此RIP适用于小型的网络。</p>
-<p>RIP中路由信息的更新是通过组播或广播来实现的。默认情况下，路由器启用了RIP进程的端口每隔30s会向它的邻居组播或广播自己的路由表，收到保报文的邻居路由器将收到的信息添加到自己的路由表中，每个路由器都进行同样的操作，最终，网络上的所有路由器都会得知全部的路由信息。</p>
+<h3 id="工作机制"><a href="#工作机制" class="headerlink" title="工作机制"></a>工作机制</h3><p>RIP是一种距离矢量算法协议，它使用UDP报文进行路由信息的交换，使用520号端口。RIP使用跳数来衡量距离，路由器到它直连网段的跳数为0，其后每经过一个路由器跳数加一，为了限制收敛时间，RIP规定跳数取0~15之间的整数，距离大于或等于16跳的网络为不可达，因此RIP适用于小型的网络。</p>
+<p>RIP中路由信息的更新是通过组播或广播来实现的。默认情况下，路由器启用了RIP进程的端口每隔30s会向它的邻居组播或广播自己的路由表，收到报文的邻居路由器将收到的信息添加到自己的路由表中，每个路由器都进行同样的操作，最终，网络上的所有路由器都会得知全部的路由信息。</p>
 <h4 id="RIP的四个定时器"><a href="#RIP的四个定时器" class="headerlink" title="RIP的四个定时器"></a>RIP的四个定时器</h4><ul>
 <li>Update timer(更新定时器)</li>
 </ul>
@@ -133,7 +133,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ainsigang.github.io/2016/08/14/RIP路由协议工作原理/" data-id="cirun2iqu00058o8lr73699ur" class="article-share-link">Partager</a>
+      <a data-url="https://ainsigang.github.io/2016/08/14/RIP路由协议工作原理/" data-id="cis0ewlog0006wc8lxknmy8jc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -144,7 +144,7 @@
   
   
     <a href="/2016/08/14/FTP协议原理/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">FTP协议原理</div>
     </a>
   
@@ -177,7 +177,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -214,7 +214,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 ain<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
 	  <br>
 	 <span style="display: inline;" id="busuanzi_container_site_uv">本站总访客数 <span id="busuanzi_value_site_uv" font="微软雅黑" style="color:white"></span> 人</span>
      <span style="display: inline;" id="busuanzi_container_site_pv">本站总访问量 <span id="busuanzi_value_site_pv" font="微软雅黑" style="color:white"></span> 次</span>
