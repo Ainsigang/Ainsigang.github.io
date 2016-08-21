@@ -85,30 +85,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>本篇介绍OSPF的4中网络类型及应用。</p>
-<a id="more"></a>
-<h3 id="OSPF网络类型"><a href="#OSPF网络类型" class="headerlink" title="OSPF网络类型"></a>OSPF网络类型</h3><p>OSPF共定义了4种不同的网络类型，分别为 <strong>广播网络(Broadcast)</strong> ， <strong>NBMA(Non-Broadcast Multi-Access)网络</strong>， <strong>点到点网络(Point-to-Point)网络</strong>， <strong>点到多网络(Point-to-Mulitpoint)网络</strong>。前两种类型的网络都要进行 <strong>DR</strong>和 <strong>BDR</strong>的选举，而后两者不进行选举。在默认情况下，OSPF协议会根据接口的链路层封装协议去自动设定接口的网络类型，以太接口的网络类型为 <strong>Broadcast</strong>,串行口如果链路层封装协议是 <strong>PPP</strong>协议或 <strong>HDLC</strong>协议,则默认网络类型为点到点网络， <strong>ATM</strong>或 <strong>帧中继(FR)</strong>接口的默认网络类型为 <strong>NBMA</strong>。OSPF的灵活之处在于接口的网络类型是可以根据需要人为修改的，这极大提高了OSPF的适应能力。</p>
-<h4 id="详细介绍"><a href="#详细介绍" class="headerlink" title="详细介绍"></a>详细介绍</h4><ul>
-<li><strong>Broadcast网络</strong></li>
-</ul>
-<p>使用于以太网，令牌环网，FDDI网络，用于连接多于2台的路由器，而且是广播型的，当路由器较多时，每台路由器需要与其他每一台路由器建立邻居关系，会出现很多冗余，因此会在网络中选择 <strong>DR和BDR</strong>，其他路由器只与 **DR和BDR建立邻接关系，一次减少冗余。网络中采用组播发送数据包，DR和BDR发送的数据包的目的地址为224.0.0.5，DRothers发送的跟心数据包目的地址为224.0.0.6.</p>
-<ul>
-<li><strong>NBMA网络</strong></li>
-</ul>
-<p>帧中继，ATM，X.25网络用于连接多余2台的路由器，但没有广播数据包的能力，必须增加另外的配置来使他们 <strong>获得邻居</strong>，网络中需要选举 <strong>DR和BDR</strong>，OSPF采用单播发送数据包。</p>
-<ul>
-<li><strong>点到点网络</strong></li>
-</ul>
-<p>连接单独一对路由器，在点到点网络上，邻居路由器总是能形成邻接关系，不需要选举DR和BDR。</p>
-<ul>
-<li><strong>点到多网络</strong></li>
-</ul>
-<p>点到多网络可以看成一群点到点链路的集合，不需要选举DR和BDR，数据包以单播方式发送，并且这种网络类型只能是其他网络类型更改而来，没有一种链路层封装协议会被缺省认为是点到多网络。</p>
-
+        
+		<a href="https://ainsigang.github.io/2016/07/30/OSPF网络类型/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/07/30/OSPF网络类型/">评论</a>
+		
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ainsigang.github.io/2016/07/30/OSPF网络类型/" data-id="cis0fazni0002u88lktbjhcvp" class="article-share-link">Share</a>
+      <a data-url="https://ainsigang.github.io/2016/07/30/OSPF网络类型/" data-id="cis461oc000033k8lb4g20gti" class="article-share-link">Share</a>
       
       
     </footer>

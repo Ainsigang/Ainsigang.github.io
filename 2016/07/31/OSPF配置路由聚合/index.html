@@ -85,29 +85,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>OSPF不支持自动路由聚合，仅支持手动路由聚合，本篇介绍OSPF的路由聚合配置。</p>
-<a id="more"></a>
-<h3 id="OSPF路由聚合"><a href="#OSPF路由聚合" class="headerlink" title="OSPF路由聚合"></a>OSPF路由聚合</h3><p>OSPF不支持自动路由聚合，仅支持手动路由聚合。OSPF的路由聚合有两种机制：</p>
-<ol>
-<li><strong>区域间路由聚合</strong></li>
-<li><strong>外部路由聚合</strong></li>
-</ol>
-<ul>
-<li><strong>区域间路由聚合</strong></li>
-</ul>
-<p>区域间路由聚合必须配置在 <strong>ABR路由器</strong>上，指的是ABR把在与自己直接相连区域中的 <strong>Type-1和Type-2 LSA</strong>转换成 <strong>Type-3 LSA</strong>时，对生成的 <strong>Type-3 LSA</strong>进行聚合，从而减少传播至与自己直接相连的区域的 <strong>Type-3 LSA</strong>的数量。需要注意的是，区域间路由聚合只能聚合由Type-1或Type-2 LSA产生的路由，如果路由是由外部或其他区域传到本区域的(或者说是路由是有Type-5或Type-3生成的),则对于这样的路由ABR是不能够聚合。</p>
-<p>使用如下命令可在ABR上配置区域间路由聚合：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">abr-summary IP MASK  //IP为聚合的网段的IP，MASK为网段的子网掩码</div></pre></td></tr></table></figure>
-<ul>
-<li><strong>外部路由聚合</strong></li>
-</ul>
-<p>外部路由聚合是指在 <strong>ASBR</strong>路由器上针对引入OSPF网络的外部路由进行的聚合，目的是减少在OSPF网络中 <strong>Type-5 LSA</strong>的数量。外部路由聚合必须在外部路由进入OSPF网络的ASBR路由器上进行。对于 <strong>NSSA</strong>区域，当该区域的ABR将 <strong>Type-7 LSA</strong>转换为 <strong>Type-5 LSA</strong>时，该ABR也可以充当ASBR的角色，并对 <strong>Type-5 LSA</strong>进行聚合。需要注意的是，当 <strong>NSSA</strong>区域存在多台ABR时，必须由 <strong>Router-ID</strong>最大的ABR进行 <strong>Type-7 LSA到Type-5 LSA</strong>的转换操作。</p>
-<p>使用如下命令可在ASBR上配置外部路由聚合：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">asbr-summary IP MASK  //IP为聚合的网段IP，MASK外网段的子网掩码</div></pre></td></tr></table></figure>
+        
+		<a href="https://ainsigang.github.io/2016/07/31/OSPF配置路由聚合/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/07/31/OSPF配置路由聚合/">评论</a>
+		
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ainsigang.github.io/2016/07/31/OSPF配置路由聚合/" data-id="cis0fazni0005u88l1bmakb0e" class="article-share-link">Share</a>
+      <a data-url="https://ainsigang.github.io/2016/07/31/OSPF配置路由聚合/" data-id="cis461oc400053k8li326hfu4" class="article-share-link">Share</a>
       
       
     </footer>

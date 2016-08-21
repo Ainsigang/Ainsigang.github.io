@@ -87,47 +87,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>网络协议复习篇之三：FTP协议的原理</p>
-<a id="more"></a>
-<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>FTP(File Transfer Protocol),文件传输协议。是internet中使用最广泛的文件传输协议，目的在于提高文件的共享性，提供非直接的远程操控计算机。FTP是一种应用层协议，建立在TCP协议之上，它需要建立两条TCP连接，一条用于数据传输，一般使用端口号21，一条用于连接控制，一般使用20号端口。</p>
-<h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><p>FTP传输文件的过程可以用如图描述：</p>
-<p><img src="/images/ftp.jpg" alt=""></p>
-<p>使用FTP进行传输文件时，会使用两个TCP连接，第一个是FTP客户端与服务端的控制连接，FTP服务器开始TCP 21号端口，等待客户端发送连接请求，FTP客户端随机开启端口，向服务器发送连接请求，用于传输客户端与服务器端之间传输命令。第二个连接时数据连接，服务器端使用TCP 20号端口与客户端建立连接，通常情况下，服务器主动与客户端建立或断开数据连接。</p>
-<h4 id="FTP的传输模式"><a href="#FTP的传输模式" class="headerlink" title="FTP的传输模式"></a>FTP的传输模式</h4><p>FTP传输数据时支持两种模式：ASCII和二进制模式。</p>
-<ul>
-<li>ASCII模式</li>
-</ul>
-<p>用于传输文本，发送端的字符在发送前将被转换成ASCII格式之后再进行传输，接收端接收后再将其转换成字符。</p>
-<ul>
-<li>二进制模式</li>
-</ul>
-<p>常用于传输     图片文件和程序文件，发送端在发送时无需转换格式即可传输。</p>
-<h4 id="FTP的工作方式"><a href="#FTP的工作方式" class="headerlink" title="FTP的工作方式"></a>FTP的工作方式</h4><p>FTP有两种工作方式：PORT方式和PASSIVE方式。</p>
-<ul>
-<li>PORT方式</li>
-</ul>
-<p>假定客户端用于建立控制连接的TCP 端口为2000，用于数据传输的TCP 端口为2001。</p>
-<ol>
-<li>首先客户端使用TCP 2000号端口与服务器端21号端口建立一个TCP连接，即控制连接。</li>
-<li>当用户发起一个要求发送或者接收文件的请求时，客户端软件使用PORT命令，这个命令包含了一个暂时端口(2001)，也包含了客户端自己的IP地址。</li>
-<li>服务器端收到PORT命令后，以源端口20，目的端口为收到的PORT命令中的暂时端口(2001),与客户端经过三次握手建立一个TCP连接，即数据连接。(由服务端发起)</li>
-<li>数据连接建立完成之后开始传输数据，以TCP进行数据传输保证了数据的可靠传输。当数据传输完成时，发送数据的主机发送一个FIN命令，这个FIN命令需要另一台主机的ACK确认，另一台主机也发送一个FIN名，同样需要发送数据的主机的ACK确认，然后完成数据传输，断开连接。</li>
-</ol>
-<ul>
-<li>PASSIVE模式</li>
-</ul>
-<ol>
-<li>同样客户端需要与服务器端建立一条TCP连接，用于控制连接，源端口号为2000，目的端口号为21.</li>
-<li>当用户发起一个要求发送或者接收文件的请求时，客户端软件使用PASV命令给服务器端，命令包含客户端自己的IP地址和一个暂时端口(2001),表示希望进入PASSIVE模式。</li>
-<li>服务器端收到PASV命令后对其进行应答，应答包含服务器的IP地址和一个暂时端口号(一个大于1024的端口号,不是20号)，这个暂时端口用于客户端建立数据传输连接。</li>
-<li>客户端收到服务器端的应答之后，以源端口为2001，目的端口为收到的服务器端的应答中包含的暂时端口，与服务器端建立一条TCP连接，即数据连接。(由客户端发起)</li>
-<li>数据连接建立完成之后开始传输数据，以TCP进行数据传输保证了数据的可靠传输。当数据传输完成时，发送数据的主机发送一个FIN命令，这个FIN命令需要另一台主机的ACK确认，另一台主机也发送一个FIN名，同样需要发送数据的主机的ACK确认，然后完成数据传输，断开连接。</li>
-</ol>
-
+        
+		<a href="https://ainsigang.github.io/2016/08/14/FTP协议原理/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/08/14/FTP协议原理/">评论</a>
+		
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ainsigang.github.io/2016/08/14/FTP协议原理/" data-id="cis0fazni0004u88lvzjyb3fw" class="article-share-link">Share</a>
+      <a data-url="https://ainsigang.github.io/2016/08/14/FTP协议原理/" data-id="cis461oc200043k8lxlx5f96l" class="article-share-link">Share</a>
       
       
     </footer>

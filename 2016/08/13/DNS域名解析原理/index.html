@@ -89,39 +89,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>网络协议复习篇一：DNS的原理</p>
-<a id="more"></a>
-<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>DNS(Domain Name System),即域名系统。DNS是一项 <strong>internet服务</strong>，主要提供网站域名与IP地址的相互转换的服务。在我们日常的上网活动中，我们一般习惯于采用网站的域名来访问，而在网络世界中，主机之间的访问是靠全球唯一的IP地址来实现的，因此需要一项服务来实现网站域名与IP地址之间的转换任务，这就是DNS服务。域名与IP地址之间是一一对应的关系，但是多个域名可以对应于同一个IP地址，就像一个人(IP),我们可以通过他的身份证号(域名1)找到他，也可以通过他的名字(域名2)找到他，还可以通过他的QQ号码(域名3)找到他。</p>
-<h3 id="DNS的结构"><a href="#DNS的结构" class="headerlink" title="DNS的结构"></a>DNS的结构</h3><p>我们通过DNS查询到的转换关系其实是一条一条的数据，说到底，DNS就是一个巨大的数据库，一个具有层次结构的分布式数据库。在DNS数据库中的名称形成的一个分层树状结构称为 <strong>域命名空间</strong>，他的层次结构如图：</p>
-<p><img src="/images/dns1.jpg" alt=""></p>
-<p>每个节点所在所在的那一层称为一个域。按照域命名空间的功能可以分为以下五类：</p>
-<p><img src="/images/dns4.jpg" alt=""></p>
-<h3 id="DNS的解析过程"><a href="#DNS的解析过程" class="headerlink" title="DNS的解析过程"></a>DNS的解析过程</h3><p>DNS解析有两种不同的方式： <strong>递归</strong> 和 <strong>迭代</strong>。</p>
-<ul>
-<li>递归查询</li>
-</ul>
-<p>客户机有时也可通过使用从以前查询获得的缓存信息就地应答查询。DNS 服务器可使用其自身的资源记录信息缓存来应答查询，也可代表请求客户机来查询或联系其他 DNS 服务器，以完全解析该名称，并随后将应答返回至客户机。这个过程称为递归。</p>
-<ul>
-<li>迭代查询</li>
-</ul>
-<p>客户机自己也可尝试联系其他的 DNS 服务器来解析名称。如果客户机这么做，它会使用基于服务器应答的独立和附加的查询，该过程称作迭代，即DNS服务器之间的交互查询就是迭代查询。</p>
-<p>DNS查询过程如图：</p>
-<p><img src="/images/dns2.jpg" alt=""></p>
-<ol>
-<li>当我们在浏览器中输入一个网站域名(如www.huawei.com)并访问时，首先主机会查询本机的Hosts文件中是否有此域名和IP的映射，如果有，则调用此IP，完成解析。</li>
-<li>如果Hosts文件中没有映射关系，则查询本地DNS缓存，如果查询到相应的映射关系，则返回IP，完成解析。以上两种都属于本地解析。</li>
-<li>如果以上两种都没有，则主机需要向本地DNS服务器发送DNS查询请求，询问“www.huawei.com的IP地址是多少啊？”，本地DNS服务器收到查询请求后，查询自己的数据库，如果发现有www.huawei.com与IP地址的映射，则向查询主机发送DNS相应返回对应的IP地址，完成解析，此解析具有权威性。</li>
-<li>如果DNS服务器在自己数据库中没有找到映射条目，则查询缓存的映射关系中有没有此映射关系，如果有，则向查询主机发送DNS响应返回IP地址，完成解析，此解析不具有权威性。</li>
-<li><p>如果本地DNS服务器的数据库和缓存解析都失败了，则本地DNS服务器根据是否设置了转发器来进行下一步查询操作。如果没有设置转发器，本地DNS服务器就会向 <strong>根域名服务器</strong> 发送查询请求，根域名服务器在全球一共有13台，根域名服务器收到请求后会判断此域名(.com)是有哪一个顶级域名服务器授权管理的，并向本地DNS服务器返回此顶级域名服务器的IP地址，本地DNS服务器收到IP后会向此顶级域名服务器继续发送查询请求，顶级域名服务器收到请求后，也会查询是哪一个二级域名服务器管理此域名(huawei.com)，然后向本地DNS服务器返回此二级域名服务器的IP地址，本地DNS服务器会继续向此二级域名服务器发送查询请求，重复以上步骤，直到本地DNS服务器得到www.huawei.com这个域名对应的IP地址，最后向查询主机发送DNS响应返回此IP地址，并将此映射关系加入缓存，保存一段时间，主机收到IP地址并也将映射关系加入自己的DNS缓存，完成解析。</p>
-</li>
-<li><p>如果本地DNS服务器设置了转发模式，此DNS服务器会把请求转发至上一级DNS服务器，由上一级进行解析，上一级如何解析又看它的转发设置，解析完成后将结果返回到本地DNS服务器，再由本地DNS服务器返回到查询主机。</p>
-</li>
-</ol>
-
+        
+		<a href="https://ainsigang.github.io/2016/08/13/DNS域名解析原理/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/08/13/DNS域名解析原理/">评论</a>
+		
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ainsigang.github.io/2016/08/13/DNS域名解析原理/" data-id="cis0fazni0003u88l9uan3yyv" class="article-share-link">Share</a>
+      <a data-url="https://ainsigang.github.io/2016/08/13/DNS域名解析原理/" data-id="cis461obx00023k8lvnp5otxb" class="article-share-link">Share</a>
       
       
     </footer>

@@ -87,64 +87,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>总结一下OSPF的常见LSA类型及特殊区域。<br><a id="more"></a></p>
-<h3 id="OSPF的lsa类型"><a href="#OSPF的lsa类型" class="headerlink" title="OSPF的lsa类型"></a>OSPF的lsa类型</h3><p>ospf的lsa类型种类很多，常见的有以下几种：</p>
-<ol>
-<li>Router LSA (Type 1) 路由器LSA</li>
-<li>Network LSA (Type 2) 网络LSA</li>
-<li>Network summary LSA (Type 3) 网络汇总LSA</li>
-<li>ASBR summary LSA (Type 4) ASBR汇总LSA</li>
-<li>Autonomous system external LSA (    Type 5) 自治域外部LSA</li>
-<li>Group membership LSA (Type 6) 组成员LSA</li>
-<li>NSSA External LSA (Type 7) NSSA外部LSA</li>
-</ol>
-<p>常见的LSA类型与其在OSPF环境中的作用如图：</p>
-<p><img src="/images/ospf_lsa.jpg" alt=""></p>
-<h4 id="详细介绍"><a href="#详细介绍" class="headerlink" title="详细介绍"></a>详细介绍</h4><ul>
-<li>LSA 1 (路由器LSA)</li>
-</ul>
-<p>描述路由器的直连链路状态信息，由每个发起路由器通告，只在本区域内传递，不会超过ABR。</p>
-<ul>
-<li>LSA 2 (网络LSA)</li>
-</ul>
-<p>描述本区域BMA/NBMA的网络信息以及连接到此网络的路由器，由本BMA/NBMA网络的DR或BDR通告，知道本区域传递。</p>
-<ul>
-<li>LSA 3 (网络汇总LSA)</li>
-</ul>
-<p>描述OSPF的区域间路由，原LSA 1所描述的路由信息会由所在区域的ABR将其转换为LSA 3。LSA 3可以传播到整个OSPF的所有区域(特殊区域除外)，由ABR通告。 <strong>LSA 3每穿过一个ABR，其ADV router都会发生改变，ADV router转变为最后一次穿越的ABR路由器。</strong></p>
-<ul>
-<li>LSA 4 (ASBR 汇总路由)</li>
-</ul>
-<p>LSA 4所承载的内容为 <strong>ASBR的router-id</strong> ,LSA 4其实就是图中R4（通告路由器）将Area 3中R11的Router-ID信息转换为LSA 4，在整个OSPF域中泛洪传播（由于LSA 5的通告路由器在穿越ABR的时候不会改变，如图中Area 3的LSA 5在穿越R4到达Area 0时，通告路由器不改变仍然是R11，因此除了Area 3，Area 0和其他区域都不知道R11的信息。此时就需要LSA 4为Area0和其他区域提供R11的信息，可以这么说，LSA 4是为LSA5所服务的）。 </p>
-<ul>
-<li>LSA 5 (自治域外部LSA)</li>
-</ul>
-<p>LSA 5 描述的是OSPF区域以外的路由(RIP,EIGRP,BGP等)，由ASBR所通告，LSA 5 可以传播到OSPF的所有区域(除特殊区域外)。 <strong>LSA 5 的通告路由器在穿越ABR时是不会改变的。</strong></p>
-<ul>
-<li>LSA 7 (NSSA外部LSA)</li>
-</ul>
-<p>由NSSA特殊区域内的ASBR产生，通告OSPF域外的路由信息，只在本区域内传播(NSSA区域)，经过ABR时转换为LSA 5类型在整个OSPF区域内传播。</p>
-<h3 id="OSPF的特殊区域"><a href="#OSPF的特殊区域" class="headerlink" title="OSPF的特殊区域"></a>OSPF的特殊区域</h3><ul>
-<li><strong>Stub Area末梢区域</strong></li>
-</ul>
-<p>在Stub区域中， <strong>只有域内和域间路由，只允许LSA 3进入本区域，LSA 4/5均不允许进入，</strong>配置Stub区域后会在区域内自动生成一条默认路由，以便访问OSPF的其他区域。</p>
-<ul>
-<li><strong>Total Stub Area完全末梢区域</strong></li>
-</ul>
-<p>在Total Stub区域内， <strong>只有本区域的路由，LSA 3/4/5都不允许进入本区域，</strong>配置Total Stub区域后，会在区域内自动生成一条默认路由。</p>
-<ul>
-<li><strong>NSSA Area区域</strong></li>
-</ul>
-<p>在NSSA区域中允许存在ASBR,所以也就可以引入外部路由，这个外部路由在NSSA区域内以LSA 7存在，当此LSA 7离开NSSA区域时，NSSA的ABR会进行LSA 7向LSA 5转换，本区域只允许LSA 3进入，不允许 LSA 4/5进入，所以此区域有 <strong>域内，域间和外部路由。</strong></p>
-<ul>
-<li><strong>Total NSSA Area区域</strong></li>
-</ul>
-<p>在NSSA区域中允许存在ASBR，所以也就可以引入外部路由。这个外部路由在NSSA区域内以LSA 7存在。当此LSA 7路由离开NSSA区域进入别的区域时，NSSA的ABR会进行LSA 7向LSA 5的转换（如图Area 7所示）。<br>本区域禁止LSA3/4/5进入，本区域只有 <strong>域内路由和外部路由。</strong></p>
-
+        
+		<a href="https://ainsigang.github.io/2016/07/27/ospf的区域及lsa类型/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/07/27/ospf的区域及lsa类型/">评论</a>
+		
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ainsigang.github.io/2016/07/27/ospf的区域及lsa类型/" data-id="cis0fazny0009u88l1zu39w4z" class="article-share-link">Share</a>
+      <a data-url="https://ainsigang.github.io/2016/07/27/ospf的区域及lsa类型/" data-id="cis461ocl00093k8lefuj2qnp" class="article-share-link">Share</a>
       
       
     </footer>

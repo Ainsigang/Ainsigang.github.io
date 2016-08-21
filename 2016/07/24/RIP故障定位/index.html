@@ -85,32 +85,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>本篇介绍一下RIP路由的故障处理思路。<br><a id="more"></a></p>
-<h3 id="RIP路由接受故障处理思路"><a href="#RIP路由接受故障处理思路" class="headerlink" title="RIP路由接受故障处理思路"></a>RIP路由接受故障处理思路</h3><ul>
-<li>检查入接口是否在RIP中宣告。</li>
-<li>检查入接口是否工作正常。</li>
-<li>检查对方的发送版本号和本地的接收版本号是否匹配。</li>
-<li>检查入接口是否配置了 <strong>undo rip input</strong> 命令。</li>
-<li>检查在RIP中是否配置了策略，过滤收到的RIP路由。</li>
-<li>检查入接口是否配置了 <strong>RIP metricin</strong>命令，使接收到的路由的度量值大于15。</li>
-<li>检查接收到的路由度量值是否大于15。</li>
-<li>检查在路由表中是否有从其他协议学到的相同的路由。</li>
-</ul>
-<h3 id="RIP发送故障处理思路"><a href="#RIP发送故障处理思路" class="headerlink" title="RIP发送故障处理思路"></a>RIP发送故障处理思路</h3><ul>
-<li>检查出接口是否在RIP中宣告。</li>
-<li>检查出接口工作是否正常。</li>
-<li>检查出接口是否配置了 <strong>silent-interface</strong>　命令。</li>
-<li>检查出接口是否配置了 <strong>undo rip output</strong>　命令。</li>
-<li>检查出接口是否配置了水平分割命令。</li>
-<li>检查在RIP中是否配置了策略，过滤了需要发布出去的RIP路由。</li>
-<li>如果要发送的路由来自本地的接口地址，检查接口的状态。</li>
-<li>检查是否有其他特殊问题。</li>
-</ul>
-
+        
+		<a href="https://ainsigang.github.io/2016/07/24/RIP故障定位/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/07/24/RIP故障定位/">评论</a>
+		
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ainsigang.github.io/2016/07/24/RIP故障定位/" data-id="cis0fazni0006u88lo6omyleg" class="article-share-link">Share</a>
+      <a data-url="https://ainsigang.github.io/2016/07/24/RIP故障定位/" data-id="cis461oca00063k8lipt55qv5" class="article-share-link">Share</a>
       
       
     </footer>

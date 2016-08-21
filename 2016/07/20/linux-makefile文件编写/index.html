@@ -85,20 +85,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>简单的makefile文件编写规则介绍。<br><a id="more"></a></p>
-<h3 id="语法规则"><a href="#语法规则" class="headerlink" title="语法规则"></a>语法规则</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">target:prerequisites</div><div class="line">    command</div></pre></td></tr></table></figure>
-<p><strong>target</strong>:要生成的目标文件</p>
-<p><strong>prerequisites</strong>:生成target所依赖的文件</p>
-<p><strong>command</strong>:执行的命令 </p>
-<p><strong>eg</strong>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">hello:hello.o #生成hello可执行文件依赖于hello.o文件</div><div class="line">    gcc -o hello hello.o #生成hello可执行文件的命令</div><div class="line">hello.o:hello.c #生成hello.o文件依赖于hello.c文件</div><div class="line">    gcc -c hello.c #编译生成hello.o文件</div><div class="line">.PHONY:clean #定义一个伪目标用于清除执行过程中生成的中间文件</div><div class="line">clean:</div><div class="line">    rm *.o #清除中间文件hello.o</div></pre></td></tr></table></figure>
-<p>在终端进入要编译的源文件所在目录下执行以下命令： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$make #编译生成可执行文件</div><div class="line">$make clean #清除中间文件即hello.o文件</div></pre></td></tr></table></figure>
-
+        
+		<a href="https://ainsigang.github.io/2016/07/20/linux-makefile文件编写/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/07/20/linux-makefile文件编写/">评论</a>
+		
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ainsigang.github.io/2016/07/20/linux-makefile文件编写/" data-id="cis0fazny0008u88ld1eo70iz" class="article-share-link">Share</a>
+      <a data-url="https://ainsigang.github.io/2016/07/20/linux-makefile文件编写/" data-id="cis461ocj00083k8lvavqdfru" class="article-share-link">Share</a>
       
       
     </footer>

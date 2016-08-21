@@ -85,55 +85,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>网络协议复习篇之四：RIP路由协议工作原理</p>
-<a id="more"></a>
-<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>RIP(Routing Information Protocol),路由信息协议。是应用较早、使用较普遍的内部网关协议（Interior Gateway Protocol，IGP），适用于小型同类网络的一个自治系统（AS）内的路由信息的传递。RIP采用的是距离矢量算法计算路由，所以也称距离向量协议。</p>
-<h3 id="工作机制"><a href="#工作机制" class="headerlink" title="工作机制"></a>工作机制</h3><p>RIP是一种距离矢量算法协议，它使用UDP报文进行路由信息的交换，使用520号端口。RIP使用跳数来衡量距离，路由器到它直连网段的跳数为0，其后每经过一个路由器跳数加一，为了限制收敛时间，RIP规定跳数取0~15之间的整数，距离大于或等于16跳的网络为不可达，因此RIP适用于小型的网络。</p>
-<p>RIP中路由信息的更新是通过组播或广播来实现的。默认情况下，路由器启用了RIP进程的端口每隔30s会向它的邻居组播或广播自己的路由表，收到报文的邻居路由器将收到的信息添加到自己的路由表中，每个路由器都进行同样的操作，最终，网络上的所有路由器都会得知全部的路由信息。</p>
-<h4 id="RIP的四个定时器"><a href="#RIP的四个定时器" class="headerlink" title="RIP的四个定时器"></a>RIP的四个定时器</h4><ul>
-<li>Update timer(更新定时器)</li>
-</ul>
-<p>在RIP进程启动后，路由器的接口每隔30s会向邻居所有路由器发送一次更新信息，包含了本路由器的完整路由表。</p>
-<ul>
-<li>Invalid timer(无效定时器)</li>
-</ul>
-<p>默认情况下，如果180秒后还未收到现有路由的更新信息，则将该路由的度量(距离)设置为16(不可达),在刷新定时器超时以前，该路由会保留在路由表中。</p>
-<ul>
-<li>Flush timer(刷新定时器)</li>
-</ul>
-<p>默认情况下，刷新定时器设置为240s，当一条路由的刷新定时器超时后，该条路由会路由表中删除。即当一条路由在180秒内没有收到更新信息，再过60s还没有收到更新信息才会被删除。</p>
-<ul>
-<li>Holddown timer(抑制定时器)</li>
-</ul>
-<p>默认为180s，该定时器用于稳定路由信息，如果在抑制期间从任何相邻路由器接收到含有更小度量的有关该网络的更新，则恢复该网络并删除抑制计时器。如果在抑制期间从相邻路由器收到的更新包含的度量与之前相同或更大，则该更新将被忽略。</p>
-<h4 id="路由环路的解决"><a href="#路由环路的解决" class="headerlink" title="路由环路的解决"></a>路由环路的解决</h4><p>因为RIP的路由信息是周期性的更新(30s)，如果在更新周期内出现链路down掉的情况，而其他路由器此时并不知道，这时就很容易产生路由环路，解决路由环路的方法有以下几种：</p>
-<ul>
-<li>水平分割(split horizon)</li>
-</ul>
-<p>要求路由器不会将路由信息从学到此路由信息的接口发出去。这样就保证了邻居路由器不会学到错误的路由信息而导致环路出现。</p>
-<ul>
-<li>触发更新</li>
-</ul>
-<p>出现环路的原因在于RIP是周期性更新，当出现链路down掉时，网络中的路由信息不一致。触发更新是在路由器感知到链路down掉时，不必等待一个更新周期，而是立即发送更新信息，确保所有路由器在第一时间知道消息。</p>
-<ul>
-<li>毒性逆转</li>
-</ul>
-<p>当一条链路dawn之后，路由器在广播该路由给邻居时将度量设置为15，邻居路由器收到之后将度量值加一之后发现不可达。该技术通常与触发更新技术结合使用。</p>
-<ul>
-<li>抑制技术</li>
-</ul>
-<p>要求路由器在收到某个网段不可达的消息之后，在一个固定的时间段内，忽略任何关于此网段的路由信息。以确保所有机器都收到坏消息，而不会错误的接受内容过时的报文。</p>
-<h4 id="两个版本的比较"><a href="#两个版本的比较" class="headerlink" title="两个版本的比较"></a>两个版本的比较</h4><p>目前RIP共有两个版本，RIPV1和RIPV2。RIPV2是对V1的补充和改进，具体有如下变化：</p>
-<ol>
-<li>RIPV1不支持无类别路由而RIPV2支持。</li>
-<li>RIPV1使用的是广播更新路由信息，而RIPV2是使用组播发送更新，组播地址为：224.0.0.9。</li>
-<li>RIPV1不支持认证，而RIPV2支持明文和MD5两种认证更加安全。</li>
-</ol>
-
+        
+		<a href="https://ainsigang.github.io/2016/08/14/RIP路由协议工作原理/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/08/14/RIP路由协议工作原理/">评论</a>
+		
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ainsigang.github.io/2016/08/14/RIP路由协议工作原理/" data-id="cis0fazni0007u88l5vbx5j2l" class="article-share-link">Share</a>
+      <a data-url="https://ainsigang.github.io/2016/08/14/RIP路由协议工作原理/" data-id="cis461ocd00073k8lutggllfq" class="article-share-link">Share</a>
       
       
     </footer>
