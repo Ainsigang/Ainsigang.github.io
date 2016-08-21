@@ -1,11 +1,90 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
+<!doctype html>
+
+
+
   
-  <title>RIP路由协议工作原理 | Ain</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="网络协议复习篇之四：RIP路由协议工作原理">
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="网络协议复习篇之四：RIP路由协议工作原理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RIP路由协议工作原理">
 <meta property="og:url" content="https://ainsigang.github.io/2016/08/14/RIP路由协议工作原理/index.html">
@@ -15,191 +94,484 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RIP路由协议工作原理">
 <meta name="twitter:description" content="网络协议复习篇之四：RIP路由协议工作原理">
-  
-    <link rel="alternate" href="/atom.xml" title="Ain" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
 
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> RIP路由协议工作原理 | Ain </title>
 </head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Ain</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://ainsigang.github.io"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-RIP路由协议工作原理" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/14/RIP路由协议工作原理/" class="article-date">
-  <time datetime="2016-08-14T12:02:43.000Z" itemprop="datePublished">2016-08-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      RIP路由协议工作原理
-    </h1>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
   
 
-      </header>
+
+
+
+
+
+
+
+
+
+  
+  
     
-    <div class="article-entry" itemprop="articleBody">
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ain</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
       
         
-		<a href="https://ainsigang.github.io/2016/08/14/RIP路由协议工作原理/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/08/14/RIP路由协议工作原理/">评论</a>
-		
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                RIP路由协议工作原理
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-14T20:02:43+08:00" content="2016-08-14">
+              2016-08-14
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>网络协议复习篇之四：RIP路由协议工作原理</p>
+<a id="more"></a>
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>RIP(Routing Information Protocol),路由信息协议。是应用较早、使用较普遍的内部网关协议（Interior Gateway Protocol，IGP），适用于小型同类网络的一个自治系统（AS）内的路由信息的传递。RIP采用的是距离矢量算法计算路由，所以也称距离向量协议。</p>
+<h3 id="工作机制"><a href="#工作机制" class="headerlink" title="工作机制"></a>工作机制</h3><p>RIP是一种距离矢量算法协议，它使用UDP报文进行路由信息的交换，使用520号端口。RIP使用跳数来衡量距离，路由器到它直连网段的跳数为0，其后每经过一个路由器跳数加一，为了限制收敛时间，RIP规定跳数取0~15之间的整数，距离大于或等于16跳的网络为不可达，因此RIP适用于小型的网络。</p>
+<p>RIP中路由信息的更新是通过组播或广播来实现的。默认情况下，路由器启用了RIP进程的端口每隔30s会向它的邻居组播或广播自己的路由表，收到报文的邻居路由器将收到的信息添加到自己的路由表中，每个路由器都进行同样的操作，最终，网络上的所有路由器都会得知全部的路由信息。</p>
+<h4 id="RIP的四个定时器"><a href="#RIP的四个定时器" class="headerlink" title="RIP的四个定时器"></a>RIP的四个定时器</h4><ul>
+<li>Update timer(更新定时器)</li>
+</ul>
+<p>在RIP进程启动后，路由器的接口每隔30s会向邻居所有路由器发送一次更新信息，包含了本路由器的完整路由表。</p>
+<ul>
+<li>Invalid timer(无效定时器)</li>
+</ul>
+<p>默认情况下，如果180秒后还未收到现有路由的更新信息，则将该路由的度量(距离)设置为16(不可达),在刷新定时器超时以前，该路由会保留在路由表中。</p>
+<ul>
+<li>Flush timer(刷新定时器)</li>
+</ul>
+<p>默认情况下，刷新定时器设置为240s，当一条路由的刷新定时器超时后，该条路由会路由表中删除。即当一条路由在180秒内没有收到更新信息，再过60s还没有收到更新信息才会被删除。</p>
+<ul>
+<li>Holddown timer(抑制定时器)</li>
+</ul>
+<p>默认为180s，该定时器用于稳定路由信息，如果在抑制期间从任何相邻路由器接收到含有更小度量的有关该网络的更新，则恢复该网络并删除抑制计时器。如果在抑制期间从相邻路由器收到的更新包含的度量与之前相同或更大，则该更新将被忽略。</p>
+<h4 id="路由环路的解决"><a href="#路由环路的解决" class="headerlink" title="路由环路的解决"></a>路由环路的解决</h4><p>因为RIP的路由信息是周期性的更新(30s)，如果在更新周期内出现链路down掉的情况，而其他路由器此时并不知道，这时就很容易产生路由环路，解决路由环路的方法有以下几种：</p>
+<ul>
+<li>水平分割(split horizon)</li>
+</ul>
+<p>要求路由器不会将路由信息从学到此路由信息的接口发出去。这样就保证了邻居路由器不会学到错误的路由信息而导致环路出现。</p>
+<ul>
+<li>触发更新</li>
+</ul>
+<p>出现环路的原因在于RIP是周期性更新，当出现链路down掉时，网络中的路由信息不一致。触发更新是在路由器感知到链路down掉时，不必等待一个更新周期，而是立即发送更新信息，确保所有路由器在第一时间知道消息。</p>
+<ul>
+<li>毒性逆转</li>
+</ul>
+<p>当一条链路dawn之后，路由器在广播该路由给邻居时将度量设置为15，邻居路由器收到之后将度量值加一之后发现不可达。该技术通常与触发更新技术结合使用。</p>
+<ul>
+<li>抑制技术</li>
+</ul>
+<p>要求路由器在收到某个网段不可达的消息之后，在一个固定的时间段内，忽略任何关于此网段的路由信息。以确保所有机器都收到坏消息，而不会错误的接受内容过时的报文。</p>
+<h4 id="两个版本的比较"><a href="#两个版本的比较" class="headerlink" title="两个版本的比较"></a>两个版本的比较</h4><p>目前RIP共有两个版本，RIPV1和RIPV2。RIPV2是对V1的补充和改进，具体有如下变化：</p>
+<ol>
+<li>RIPV1不支持无类别路由而RIPV2支持。</li>
+<li>RIPV1使用的是广播更新路由信息，而RIPV2是使用组播发送更新，组播地址为：224.0.0.9。</li>
+<li>RIPV1不支持认证，而RIPV2支持明文和MD5两种认证更加安全。</li>
+</ol>
+
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://ainsigang.github.io/2016/08/14/RIP路由协议工作原理/" data-id="cis461ocd00073k8lutggllfq" class="article-share-link">Share</a>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/14/FTP协议原理/" rel="next" title="FTP协议原理">
+                <i class="fa fa-chevron-left"></i> FTP协议原理
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
       
       
     </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-  
-    <a href="/2016/08/14/FTP协议原理/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">FTP协议原理</div>
-    </a>
-  
-</nav>
+  </article>
 
-  
-</article>
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
 
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li></ul>
+    <div class="post-spread">
+      
     </div>
   </div>
 
 
-  
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
+  </div>
+
+
+        </div>
         
-          <li>
-            <a href="/2016/08/14/RIP路由协议工作原理/">RIP路由协议工作原理</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/14/FTP协议原理/">FTP协议原理</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/13/DHCP工作原理/">DHCP工作原理</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/13/DNS域名解析原理/">DNS域名解析原理</a>
-          </li>
-        
-          <li>
-            <a href="/2016/07/31/OSPF配置路由聚合/">OSPF配置路由聚合</a>
-          </li>
-        
-      </ul>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
     </div>
   </div>
 
-  
-</aside>
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="ain" />
+          <p class="site-author-name" itemprop="name">ain</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工作机制"><span class="nav-number">2.</span> <span class="nav-text">工作机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RIP的四个定时器"><span class="nav-number">2.1.</span> <span class="nav-text">RIP的四个定时器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#路由环路的解决"><span class="nav-number">2.2.</span> <span class="nav-text">路由环路的解决</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#两个版本的比较"><span class="nav-number">2.3.</span> <span class="nav-text">两个版本的比较</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
         
       </div>
-      <footer id="footer">
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
   
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2016 ain<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-	  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-      </script>
-      </br>本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-  </div>
-  </div>
-</footer>
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ain</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
     </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
-
   </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
 </body>
 </html>
