@@ -90,7 +90,7 @@
 <meta property="og:url" content="https://ainsigang.github.io/2016/07/30/OSPF网络类型/index.html">
 <meta property="og:site_name" content="Ain">
 <meta property="og:description" content="本篇介绍OSPF的4中网络类型及应用。">
-<meta property="og:updated_time" content="2016-07-30T09:55:21.928Z">
+<meta property="og:updated_time" content="2016-08-21T09:18:07.618Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OSPF网络类型">
 <meta name="twitter:description" content="本篇介绍OSPF的4中网络类型及应用。">
@@ -260,6 +260,9 @@
           
 
           
+		  
+          <span id="busuanzi_container_page_pv">  |  阅读量 <span id="busuanzi_value_page_pv"></span> 次</span>
+		  
         </div>
       </header>
     
@@ -277,7 +280,7 @@
 <h4 id="详细介绍"><a href="#详细介绍" class="headerlink" title="详细介绍"></a>详细介绍</h4><ul>
 <li><strong>Broadcast网络</strong></li>
 </ul>
-<p>使用于以太网，令牌环网，FDDI网络，用于连接多于2台的路由器，而且是广播型的，当路由器较多时，每台路由器需要与其他每一台路由器建立邻居关系，会出现很多冗余，因此会在网络中选择 <strong>DR和BDR</strong>，其他路由器只与 **DR和BDR建立邻接关系，一次减少冗余。网络中采用组播发送数据包，DR和BDR发送的数据包的目的地址为224.0.0.5，DRothers发送的跟心数据包目的地址为224.0.0.6.</p>
+<p>使用于以太网，令牌环网，FDDI网络，用于连接多于2台的路由器，而且是广播型的，当路由器较多时，每台路由器需要与其他每一台路由器建立邻居关系，会出现很多冗余，因此会在网络中选择 <strong>DR和BDR</strong>，其他路由器只与 <strong>DR</strong>和 <strong>BDR</strong>建立邻接关系，以此减少冗余。网络中采用组播发送数据包，DR和BDR发送的数据包的目的地址为224.0.0.5，DRothers发送的跟心数据包目的地址为224.0.0.6.</p>
 <ul>
 <li><strong>NBMA网络</strong></li>
 </ul>
@@ -460,6 +463,10 @@
     NexT.Muse
   </a>
 </div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+Total visited <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
+You are the <span id="busuanzi_value_site_uv"></span>th visitor
 
         
 
